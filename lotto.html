@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또번호 생성기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lotto Number Generator</h1>
+        <button id="generate-btn">Generate Numbers</button>
+        <ul id="numbers-list"></ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const generateBtn = document.getElementById('generate-btn');
+            const numbersList = document.getElementById('numbers-list');
+
+            generateBtn.addEventListener('click', function () {
+                generateNumbers();
+            });
+
+            function generateNumbers() {
+                // Clear previous numbers
+                numbersList.innerHTML = '';
+
+                // Generate 6 unique random numbers
+                const numbers = [];
+                while (numbers.length < 6) {
+                    const randomNumber = Math.floor(Math.random() * 45) + 1;
+                    if (!numbers.includes(randomNumber)) {
+                        numbers.push(randomNumber);
+                    }
+                }
+
+                // Sort numbers in ascending order
+                numbers.sort(function (a, b) {
+                    return a - b;
+                });
+
+                // Display numbers
+                numbers.forEach(function (number) {
+                    const li = document.createElement('li');
+                    li.textContent = number;
+                    numbersList.appendChild(li);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
